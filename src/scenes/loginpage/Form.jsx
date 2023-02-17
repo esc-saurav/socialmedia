@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Dropzone from "./Dropzone";
 import { useCallback } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const Form = () => {
   const {
     register,
@@ -13,7 +14,7 @@ const Form = () => {
   } = useForm();
 
   const onDrop = useCallback((acceptedFiles) => {
-    setValue("picture", acceptedFiles[0]);
+    setValue("picturePath", acceptedFiles[0]);
   }, []);
 
   const onSubmit = async (data) => {
@@ -24,7 +25,7 @@ const Form = () => {
     formData.append("occupation", data.occupation);
     formData.append("password", data.password);
     formData.append("email", data.email);
-    formData.append("profileImage", data.picture);
+    formData.append("picturePath", data.picturePath.name);
     try {
       const response = await axios.post(
         "http://localhost:3001/auth/register",
@@ -134,9 +135,12 @@ const Form = () => {
           >
             Register
           </button>
-          <p className="text-sm text-blue-600 underline cursor-pointer">
+          <Link
+            to="/login"
+            className="text-sm text-blue-600 underline cursor-pointer"
+          >
             Already Have an account? Login here
-          </p>
+          </Link>
         </div>
       </form>
     </div>
