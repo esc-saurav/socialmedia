@@ -1,96 +1,134 @@
 import React from "react";
-import UserImage from "../../components/UserImage";
+// import UserImage from "../../components/UserImage";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {
+  LinkedInIcon,
+  OcccupationIcon,
+  PencilIcon,
+  TwitterIcon,
+  UserIcon,
+} from "../../assets/svg";
+import { LocationIcon } from "../../assets/svg";
 
 const UserWidget = ({ userId, pictutePath }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
 
-  //   const getUser = async () => {
-  //     try {
-  //       const response = axios.get(`http://localhost:3001/users/${userId}`);
-  //       setUser(response.data);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const getUser = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/users/${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(response.data);
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   useEffect(() => {
-  //     getUser();
-  //   }, []);
+  useEffect(() => {
+    getUser();
+  });
 
-  //   if (!user) {
-  //     return null;
-  //   }
+  if (!user) {
+    return null;
+  }
 
-  //   const {
-  //     firstName,
-  //     lastName,
-  //     location,
-  //     occupation,
-  //     viewedProfile,
-  //     impressions,
-  //     friends,
-  //   } = user;
+  const {
+    firstName,
+    lastName,
+    location,
+    occupation,
+    viewedProfile,
+    impressions,
+    friends,
+  } = user;
 
   return (
     <>
-      <div>
-        <div className="flex">
-          <div className="flex ">
-            <img src="" />
-            <div className="flex flex-col">
-              <p>name</p>
-              <p>friends</p>
-            </div>
-          </div>
-          <div>friends</div>
-        </div>
-        <hr></hr>
-        <div className="flex flex-col">
-          <div className="flex ">
-            <div>logo</div>
-            <div>text</div>
-          </div>
-          <div className="flex">
-            <div>logo</div>
-            <div>text</div>
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <div className="flex">
-            <div>text</div>
-            <div>num</div>
-          </div>
-          <div className="flex">
-            <div>text</div>
-            <div>num</div>
-          </div>
-          <div className="flex flex-col">
-            <p>Social profile</p>
-            <div className="flex ">
-              <div className="flex">
-                <div>twitter</div>
-                <div className="flex flex-col">
-                  <p>Twitter</p>
-                  <p>Social media</p>
+      <div className="px-16 py-7">
+        <div className="w-[26%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 ">
+          <div
+            onClick={() => navigate(`/profile/${userId}`)}
+            className="flex items-center justify-between cursor-pointer"
+          >
+            <div className="flex gap-2 items-center ">
+              <img
+                className="h-12 w-12 object-cover rounded-full"
+                // src={pictutePath}
+                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+                alt=""
+              />
+              <div className="flex flex-col">
+                <div className="flex gap-1">
+                  <p>{firstName}</p>
+                  <p>{lastName}</p>
                 </div>
-                <div>pen</div>
+                <p className="text-sm text-slate-500">
+                  {friends.length} friends
+                </p>
               </div>
             </div>
-            <div className="flex ">
-              <div className="flex">
-                <div>twitter</div>
-                <div className="flex flex-col">
-                  <p>Twitter</p>
-                  <p>Social media</p>
+            <UserIcon className="h-4 w-4 cursor-pointer" />
+          </div>
+          <hr></hr>
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-2 items-center ">
+              <LocationIcon className="h-4 w-4" />
+              <div className="text-sm text-slate-500">{location}</div>
+            </div>
+            <div className="flex gap-2 items-center">
+              <OcccupationIcon className="h-4 w-4" />
+              <div className="text-sm text-slate-500">{occupation}</div>
+            </div>
+          </div>
+          <hr></hr>
+
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-slate-500">
+                Who viewed your profie?
+              </div>
+              <div className="text-sm text-slate-500">{viewedProfile}</div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-slate-500">
+                Impressions of your post
+              </div>
+              <div className="text-sm text-slate-500">{impressions}</div>
+            </div>
+            <hr></hr>
+
+            <div className="flex flex-col gap-2">
+              <p>Social profile</p>
+
+              <div className="flex items-center justify-between">
+                <div className="flex gap-4 items-center">
+                  <LinkedInIcon className="h-6 w-6" />
+                  <div className="flex flex-col">
+                    <div className="text-sm">LinkedIn</div>
+                    <div className="text-sm text-slate-500">Social Network</div>
+                  </div>
                 </div>
-                <div>pen</div>
+                <PencilIcon className="h-4 w-4 cursor-pointer" />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex gap-4 items-center">
+                  <TwitterIcon className="h-6 w-6" />
+                  <div className="flex flex-col">
+                    <div className="text-sm">Twitter</div>
+                    <div className="text-sm text-slate-500">Social Network</div>
+                  </div>
+                </div>
+                <PencilIcon className="h-4 w-4 cursor-pointer" />
               </div>
             </div>
           </div>
