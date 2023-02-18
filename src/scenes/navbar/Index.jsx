@@ -55,17 +55,17 @@ const Navbar = () => {
             }`}
           >
             <div className="flex flex-col  gap-4 items-center">
-            <SunIcon className="h-5 w-5" />
-            <ChatIcon className="h-5 w-5" />
-            <BellIcon className="h-5 w-5" />
-            <WhatIcon className="h-5 w-5" />
-          </div>
-          <div className="p-4">
-            <select className="bg-gray-200 rounded-sm  h-10 outline-none p-2 cursor-pointer">
-              <option>Fake name</option>
-              <option>GG</option>
-            </select>
-          </div>
+              <SunIcon className="h-5 w-5" />
+              <ChatIcon className="h-5 w-5" />
+              <BellIcon className="h-5 w-5" />
+              <WhatIcon className="h-5 w-5" />
+            </div>
+            <div className="p-4">
+              <select className="bg-gray-200 rounded-sm  h-10 outline-none p-2 cursor-pointer">
+                <option>Fake name</option>
+                <option>GG</option>
+              </select>
+            </div>
           </div>
         )}
       </div>
