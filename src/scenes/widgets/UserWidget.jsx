@@ -12,6 +12,8 @@ import {
   UserIcon,
 } from "../../assets/svg";
 import { LocationIcon } from "../../assets/svg";
+import MyPostWidget from "./MyPostWidget";
+import SponserWidget from "./SponserWidget";
 
 const UserWidget = ({ userId, pictutePath }) => {
   const [user, setUser] = useState(null);
@@ -35,7 +37,7 @@ const UserWidget = ({ userId, pictutePath }) => {
 
   useEffect(() => {
     getUser();
-  });
+  }, []);
 
   if (!user) {
     return null;
@@ -53,8 +55,8 @@ const UserWidget = ({ userId, pictutePath }) => {
 
   return (
     <>
-      <div className="px-16 py-7">
-        <div className="w-[26%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 ">
+      <div className="px-16 py-7 flex gap-8">
+        <div className="w-[30%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 ">
           <div
             onClick={() => navigate(`/profile/${userId}`)}
             className="flex items-center justify-between cursor-pointer"
@@ -133,6 +135,9 @@ const UserWidget = ({ userId, pictutePath }) => {
             </div>
           </div>
         </div>
+
+        <MyPostWidget />
+        <SponserWidget/>
       </div>
     </>
   );
