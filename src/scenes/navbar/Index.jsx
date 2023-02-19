@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-import { SearchIcon } from "../../assets/svg/index";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { LogoutIcon, SearchIcon } from "../../assets/svg/index";
 import { SunIcon } from "../../assets/svg/index";
 import { BellIcon } from "../../assets/svg/index";
 import { ChatIcon } from "../../assets/svg/index";
@@ -10,17 +11,17 @@ import { HamburgerIcon } from "../../assets/svg/index";
 
 const Navbar = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
-  // const fullName = `${user.firstName} ${user.lastName}`;
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <nav className="shadow-md">
       <div className="py-4 flex justify-between items-center lg:w-11/12 mx-auto px-4">
         <div className="flex gap-5 items-center">
-          <h1 className="text-2xl font-bold text-blue-600">SocialMedia</h1>
+          <h1 className="text-3xl font-bold text-blue-600">SocialMedia</h1>
           <div className="md:flex hidden items-center relative ">
             <input
               className="border bg-gray-200  h-10 w-60 outline-none p-2 rounded-lg"
@@ -37,10 +38,16 @@ const Navbar = () => {
             <BellIcon className="h-6 w-6" />
             <WhatIcon className="h-6 w-6" />
           </div>
-          <select className="bg-gray-200 rounded-sm w-32 h-10 outline-none p-2 cursor-pointer">
-            <option>Fake name</option>
-            <option>GG</option>
-          </select>
+          <div className="flex gap-4 items-center">
+            <span>
+              <p>Welcome,</p>
+              <p>{fullName}</p>
+            </span>
+            <span className="flex gap-1 bg-blue-600 p-2 text-white rounded-md cursor-pointer ">
+              <p>Logout</p>
+              <LogoutIcon className="h-6 w-6" />
+            </span>
+          </div>
         </div>
         <HamburgerIcon
           onClick={() => setIsMobileMenu((prev) => !prev)}

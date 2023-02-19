@@ -58,6 +58,7 @@ const Login = () => {
           className="w-[55%] mx-auto py-4 border rounded-md px-8 "
         >
           <div className="flex flex-col space-y-2 items-center justify-center">
+            <h1 className="text-3xl text-blue-500">Login Here</h1>
             <input
               className="border border-slate-400 outline-none h-9 rounded-sm"
               type="email"

@@ -10,6 +10,12 @@ import { ReactComponent as OcccupationIcon } from "../svg/occupation.svg";
 import { ReactComponent as PencilIcon } from "../svg/pencil.svg";
 import { ReactComponent as TwitterIcon } from "../svg/twitter.svg";
 import { ReactComponent as LinkedInIcon } from "../svg/linkedin.svg";
+import { ReactComponent as LogoutIcon } from "../svg/logout.svg";
+import { ReactComponent as WelcomeIcon } from "../svg/welcomeicon.svg";
+import { ReactComponent as ImageIcon } from "../svg/imageIcon.svg";
+import { ReactComponent as ClipIcon } from "../svg/clip.svg";
+import { ReactComponent as ClipboardIcon } from "../svg/clipboard.svg";
+import { ReactComponent as AudioIcon } from "../svg/audio.svg";
 
 export {
   SearchIcon,
@@ -23,5 +29,11 @@ export {
   LocationIcon,
   PencilIcon,
   TwitterIcon,
-  LinkedInIcon
+  LinkedInIcon,
+  LogoutIcon,
+  WelcomeIcon,
+  ImageIcon,
+  ClipIcon,
+  ClipboardIcon,
+  AudioIcon,
 };

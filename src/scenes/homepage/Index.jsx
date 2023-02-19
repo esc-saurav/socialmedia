@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../navbar/Index";
+import MyPostWidget from "../widgets/MyPostWidget";
 import UserWidget from "../widgets/UserWidget";
 
 const HomePage = () => {
@@ -14,3 +15,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
