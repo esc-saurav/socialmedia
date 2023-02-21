@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Navbar from "../navbar/Index";
 import MyPostWidget from "../widgets/MyPostWidget";
 import UserWidget from "../widgets/UserWidget";
+import FriendsWidget from "../widgets/FriendsWidget";
 
 const HomePage = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
@@ -10,6 +11,7 @@ const HomePage = () => {
     <>
       <Navbar />
       <UserWidget userId={_id} pictutePath={picturePath} />
+
     </>
   );
 };

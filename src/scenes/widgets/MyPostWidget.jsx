@@ -26,25 +26,25 @@ const MyPostWidget = () => {
       <hr></hr>
       <ul className="flex items-center justify-between w-full">
         <li>
-          <span className="flex gap-1 items-center">
+          <span className="flex gap-1 items-center cursor-pointer">
             <ImageIcon className="h-5 w-5" />
             <p className="text-sm text-slate-500">Image</p>
           </span>
         </li>
         <li>
-          <span className="flex gap-1 items-center">
+          <span className="flex gap-1 items-center cursor-pointer">
             <ClipboardIcon className="h-5 w-5" />
             <p className="text-sm text-slate-500">Clip</p>
           </span>
         </li>
         <li>
-          <span className="flex gap-1 items-center">
+          <span className="flex gap-1 items-center cursor-pointer">
             <ClipIcon className="h-5 w-5" />
             <p className="text-sm text-slate-500">Attachement</p>
           </span>
         </li>
         <li>
-          <span className="flex gap-1 items-center">
+          <span className="flex gap-1 items-center cursor-pointer">
             <AudioIcon className="h-5 w-5" />
             <p className="text-sm text-slate-500">Audio</p>
           </span>

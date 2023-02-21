@@ -16,6 +16,7 @@ import { ReactComponent as ImageIcon } from "../svg/imageIcon.svg";
 import { ReactComponent as ClipIcon } from "../svg/clip.svg";
 import { ReactComponent as ClipboardIcon } from "../svg/clipboard.svg";
 import { ReactComponent as AudioIcon } from "../svg/audio.svg";
+import { ReactComponent as RemoveFriendIcon } from "../svg/removefriend.svg";
 
 export {
   SearchIcon,
@@ -36,4 +37,5 @@ export {
   ClipIcon,
   ClipboardIcon,
   AudioIcon,
+  RemoveFriendIcon,
 };
