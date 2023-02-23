@@ -57,10 +57,10 @@ const Login = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="w-[55%] mx-auto py-4 border rounded-md px-8 "
         >
-          <div className="flex flex-col space-y-2 items-center justify-center">
+          <div className="flex flex-col space-y-2 items-center justify-center w-2/4 mx-auto">
             <h1 className="text-3xl text-blue-500">Login Here</h1>
             <input
-              className="border border-slate-400 outline-none h-9 rounded-sm"
+              className="border border-slate-400 outline-none h-9 w-full rounded-sm"
               type="email"
               placeholder=" Email"
               name="email"
@@ -74,7 +74,7 @@ const Login = () => {
             />
             <p className="text-red-500 text-sm ml-2">{errors.email?.message}</p>
             <input
-              className="border border-slate-400 outline-none h-9 rounded-sm"
+              className="border border-slate-400 outline-none h-9 w-full rounded-sm"
               type="password"
               placeholder=" Password"
               {...register("password", {
@@ -88,7 +88,7 @@ const Login = () => {
             <p className="text-red-500 text-sm">{errors.password?.message}</p>
             <button
               type="submit"
-              className="bg-blue-500 outline-none text-white rounded-sm h-9 px-3 "
+              className="bg-blue-500 outline-none text-white rounded-sm w-1/4 h-9 px-3 "
             >
               login
             </button>

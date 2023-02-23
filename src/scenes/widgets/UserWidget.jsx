@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import FriendsWidget from "./FriendsWidget";
 import {
   LinkedInIcon,
   OcccupationIcon,
@@ -61,7 +62,7 @@ const UserWidget = ({ userId, pictutePath }) => {
             onClick={() => navigate(`/profile/${userId}`)}
             className="flex items-center justify-between cursor-pointer"
           >
-            <div className="flex gap-2 items-center ">
+            <div className="flex gap-2 items-center">
               <img
                 className="h-12 w-12 object-cover rounded-full"
                 // src={pictutePath}
@@ -135,9 +136,12 @@ const UserWidget = ({ userId, pictutePath }) => {
             </div>
           </div>
         </div>
-
         <MyPostWidget />
-        <SponserWidget/>
+        <div className="w-[30%] flex flex-col gap-4">
+          <SponserWidget /> 
+          <FriendsWidget />
+          
+        </div>
       </div>
     </>
   );
