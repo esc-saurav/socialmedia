@@ -3,12 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 /* * {
   outline: 1px solid red;
 } */
-
 
 .animation {
   @apply transition-all duration-300 ease-in-out;

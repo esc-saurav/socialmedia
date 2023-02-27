@@ -56,8 +56,8 @@ const UserWidget = ({ userId, pictutePath }) => {
 
   return (
     <>
-      <div className="px-16 py-7 flex gap-8">
-        <div className="w-[30%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 ">
+      <div className="px-8 py-7 flex gap-8 ">
+        <div className="w-[30%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 h-1/2 sticky top-24">
           <div
             onClick={() => navigate(`/profile/${userId}`)}
             className="flex items-center justify-between cursor-pointer"
@@ -136,11 +136,12 @@ const UserWidget = ({ userId, pictutePath }) => {
             </div>
           </div>
         </div>
-        <MyPostWidget />
-        <div className="w-[30%] flex flex-col gap-4">
-          <SponserWidget /> 
+        <div className="w-[40%]">
+          <MyPostWidget />
+        </div>
+        <div className="w-[30%] flex flex-col gap-4 h-[50%] sticky top-24 ">
+          <SponserWidget />
           <FriendsWidget />
-          
         </div>
       </div>
     </>

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -49,13 +49,19 @@ const Login = () => {
 
   return (
     <div>
-      <div className="shadow-md text-center py-4">
+      <div className=" flex  justify-around shadow-md text-center py-4">
         <p className="font-bold text-blue-500 text-3xl">SocialMedia</p>
+        <button
+          onClick={() => navigate("/")}
+          className="bg-blue-500 text-white rounded-md px-3 py-1"
+        >
+          Sign Up
+        </button>
       </div>
       <div className="py-4">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-[55%] mx-auto py-4 border rounded-md px-8 "
+          className="w-[55%] mx-auto py-4 border shadow-md rounded-md px-8 "
         >
           <div className="flex flex-col space-y-2 items-center justify-center w-2/4 mx-auto">
             <h1 className="text-3xl text-blue-500">Login Here</h1>
@@ -88,7 +94,7 @@ const Login = () => {
             <p className="text-red-500 text-sm">{errors.password?.message}</p>
             <button
               type="submit"
-              className="bg-blue-500 outline-none text-white rounded-sm w-1/4 h-9 px-3 "
+              className="bg-blue-500 outline-none text-white rounded-md w-1/4 h-9 px-3 "
             >
               login
             </button>
