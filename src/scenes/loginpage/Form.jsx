@@ -39,10 +39,10 @@ const Form = () => {
   };
 
   return (
-    <div className="py-4">
+    <div className="py-4 ">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[55%] mx-auto space-y-2 py-4 border rounded-md px-8 "
+        className="w-[55%] mx-auto space-y-2 py-4 border shadow-md rounded-md px-8 "
       >
         <p className="font-bold">Welcome to socialMedia app!</p>
         <div className="flex flex-col gap-4 ">

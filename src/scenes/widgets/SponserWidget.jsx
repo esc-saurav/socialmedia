@@ -3,7 +3,7 @@ import FriendsWidget from "./FriendsWidget";
 
 const SponserWidget = () => {
   return (
-    <div className=" flex flex-col border p-4 rounded-md shadow-md space-y-2">
+    <div className=" flex flex-col border p-4 rounded-md shadow-md space-y-2 ">
       <div className="flex items-center justify-between ">
         <p className="font-medium">Sponsored</p>
         <p className="text-sm text-slate-500 cursor-pointer">Create Ad</p>

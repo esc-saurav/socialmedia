@@ -4,7 +4,7 @@ import { RemoveFriendIcon } from "../../assets/svg";
 const FriendsWidget = () => {
   return (
     <>
-      <div className="flex flex-col border p-4 rounded-md shadow-md space-y-2">
+      <div className="flex flex-col border p-4 rounded-md shadow-md space-y-2 sticky top-24">
         <p className="text-sm font-[500]">Friend List</p>
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">

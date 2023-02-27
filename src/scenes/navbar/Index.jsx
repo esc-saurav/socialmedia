@@ -8,17 +8,16 @@ import { BellIcon } from "../../assets/svg/index";
 import { ChatIcon } from "../../assets/svg/index";
 import { WhatIcon } from "../../assets/svg/index";
 import { HamburgerIcon } from "../../assets/svg/index";
+import { setLogout } from "../../state";
 
 const Navbar = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
   const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
-    <nav className="shadow-md">
+    <nav className="shadow-md sticky top-0 bg-white">
       <div className="py-4 flex justify-between items-center lg:w-11/12 mx-auto px-4">
         <div className="flex gap-5 items-center">
           <h1 className="text-3xl font-bold text-blue-600">SocialMedia</h1>
@@ -43,10 +42,13 @@ const Navbar = () => {
               <p>Welcome,</p>
               <p>{fullName}</p>
             </span>
-            <span className="flex gap-1 bg-blue-600 p-2 text-white rounded-md cursor-pointer ">
+            <button
+              onClick={() => dispatch(setLogout())}
+              className="flex gap-1 bg-blue-600 p-2 text-white rounded-md cursor-pointer "
+            >
               <p>Logout</p>
               <LogoutIcon className="h-6 w-6" />
-            </span>
+            </button>
           </div>
         </div>
         <HamburgerIcon
