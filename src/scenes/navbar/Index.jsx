@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LogoutIcon, SearchIcon } from "../../assets/svg/index";
 import { SunIcon } from "../../assets/svg/index";
@@ -32,10 +31,10 @@ const Navbar = () => {
         </div>
         <div className="md:flex items-center gap-7 hidden">
           <div className="flex gap-6 items-center">
-            <SunIcon className="h-6 w-6" />
-            <ChatIcon className="h-6 w-6" />
-            <BellIcon className="h-6 w-6" />
-            <WhatIcon className="h-6 w-6" />
+            <SunIcon className="h-6 w-6 cursor-pointer" />
+            <ChatIcon className="h-6 w-6 cursor-pointer" />
+            <BellIcon className="h-6 w-6 cursor-pointer" />
+            <WhatIcon className="h-6 w-6 cursor-pointer" />
           </div>
           <div className="flex gap-4 items-center">
             <span>

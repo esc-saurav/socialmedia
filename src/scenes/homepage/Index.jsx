@@ -10,12 +10,9 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <UserWidget userId={_id} pictutePath={picturePath} />
-
+      <UserWidget userId={_id} picturePath={picturePath} />
     </>
   );
 };
 
 export default HomePage;
-
-

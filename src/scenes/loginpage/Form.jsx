@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Dropzone from "./Dropzone";
-import { useCallback } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 const Form = () => {
+  const [photo, setPhoto] = useState("");
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm();
 
-  const onDrop = useCallback((acceptedFiles) => {
-    setValue("picturePath", acceptedFiles[0]);
-  }, []);
+  // const token = useSelector((state) => state.auth);
 
   const onSubmit = async (data) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
@@ -25,11 +23,18 @@ const Form = () => {
     formData.append("occupation", data.occupation);
     formData.append("password", data.password);
     formData.append("email", data.email);
-    formData.append("picturePath", data.picturePath.name);
+    formData.append("picture", photo);
+    formData.append("picturePath", photo.name);
+
     try {
       const response = await axios.post(
         "http://localhost:3001/auth/register",
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       console.log(response.data);
     } catch (error) {
@@ -100,7 +105,11 @@ const Form = () => {
           <p className="text-red-500 text-sm ml-2">
             {errors.occupation?.message}
           </p>
-          <Dropzone onDrop={onDrop} />
+          <input
+            type="file"
+            name="picture"
+            onChange={(e) => setPhoto(e.target.files[0])}
+          />
           <p className="text-red-500 text-sm ml-2">{errors.file?.message}</p>
           <input
             className="border border-slate-400 outline-none h-9 rounded-sm"

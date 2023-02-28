@@ -16,7 +16,7 @@ import { LocationIcon } from "../../assets/svg";
 import MyPostWidget from "./MyPostWidget";
 import SponserWidget from "./SponserWidget";
 
-const UserWidget = ({ userId, pictutePath }) => {
+const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
@@ -65,13 +65,14 @@ const UserWidget = ({ userId, pictutePath }) => {
             <div className="flex gap-2 items-center">
               <img
                 className="h-12 w-12 object-cover rounded-full"
-                // src={pictutePath}
-                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+                src={picturePath}
+                // src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
                 alt=""
               />
               <div className="flex flex-col">
                 <div className="flex gap-1">
                   <p>{firstName}</p>
+
                   <p>{lastName}</p>
                 </div>
                 <p className="text-sm text-slate-500">
