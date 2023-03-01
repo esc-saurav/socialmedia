@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -14,8 +14,8 @@ const Login = () => {
   } = useForm();
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
   const onSubmit = async (data) => {
     const formData = {
       email: data.email,
@@ -31,6 +31,7 @@ const Login = () => {
       );
 
       const loggedIn = await response.data;
+      console.log("now", response.data);
       if (loggedIn) {
         dispatch(
           setLogin({

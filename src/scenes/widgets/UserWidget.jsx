@@ -57,7 +57,7 @@ const UserWidget = ({ userId, picturePath }) => {
   return (
     <>
       <div className="px-8 py-7 flex gap-8 ">
-        <div className="w-[30%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 h-1/2 sticky top-24">
+        <div className="w-[30%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 h-1/2 sticky  top-24">
           <div
             onClick={() => navigate(`/profile/${userId}`)}
             className="flex items-center justify-between cursor-pointer"
@@ -75,7 +75,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
                   <p>{lastName}</p>
                 </div>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-500"> 
                   {friends.length} friends
                 </p>
               </div>
