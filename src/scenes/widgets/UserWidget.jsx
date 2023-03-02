@@ -16,7 +16,7 @@ import { LocationIcon } from "../../assets/svg";
 import MyPostWidget from "./MyPostWidget";
 import SponserWidget from "./SponserWidget";
 
-const UserWidget = ({ userId, pictutePath }) => {
+const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
@@ -57,7 +57,7 @@ const UserWidget = ({ userId, pictutePath }) => {
   return (
     <>
       <div className="px-8 py-7 flex gap-8 ">
-        <div className="w-[30%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 h-1/2 sticky top-24">
+        <div className="w-[30%] py-3 px-4 border flex flex-col shadow-md rounded-md gap-2 h-1/2 sticky  top-24">
           <div
             onClick={() => navigate(`/profile/${userId}`)}
             className="flex items-center justify-between cursor-pointer"
@@ -65,16 +65,17 @@ const UserWidget = ({ userId, pictutePath }) => {
             <div className="flex gap-2 items-center">
               <img
                 className="h-12 w-12 object-cover rounded-full"
-                // src={pictutePath}
-                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+                src={picturePath}
+                // src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
                 alt=""
               />
               <div className="flex flex-col">
                 <div className="flex gap-1">
                   <p>{firstName}</p>
+
                   <p>{lastName}</p>
                 </div>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-500"> 
                   {friends.length} friends
                 </p>
               </div>
@@ -93,7 +94,6 @@ const UserWidget = ({ userId, pictutePath }) => {
             </div>
           </div>
           <hr></hr>
-
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <div className="text-sm text-slate-500">

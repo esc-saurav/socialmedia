@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Dropzone from "./Dropzone";
-import { useCallback } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Dropzone from "react-dropzone";
+
 const Form = () => {
+  const [file, setFile] = useState(null);
+
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm();
 
-  const onDrop = useCallback((acceptedFiles) => {
-    setValue("picturePath", acceptedFiles[0]);
-  }, []);
+  const onDrop = (acceptedFiles) => {
+    setFile(acceptedFiles[0]);
+  };
 
   const onSubmit = async (data) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
@@ -25,11 +27,16 @@ const Form = () => {
     formData.append("occupation", data.occupation);
     formData.append("password", data.password);
     formData.append("email", data.email);
-    formData.append("picturePath", data.picturePath.name);
+    formData.append("picture", file);
+    formData.append("picturePath", file.name);
+
     try {
       const response = await axios.post(
         "http://localhost:3001/auth/register",
-        formData
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
       );
       console.log(response.data);
     } catch (error) {
@@ -100,8 +107,24 @@ const Form = () => {
           <p className="text-red-500 text-sm ml-2">
             {errors.occupation?.message}
           </p>
-          <Dropzone onDrop={onDrop} />
-          <p className="text-red-500 text-sm ml-2">{errors.file?.message}</p>
+          {/* <input
+            type="file"
+            name="picture"
+            onChange={(e) => setPhoto(e.target.files[0])}
+          /> */}
+          {/* <p className="text-red-500 text-sm ml-2">{errors.file?.message}</p> */}
+          <Dropzone  onDrop={onDrop}>
+            {({ getRootProps, getInputProps }) => (
+              <div {...getRootProps()}>
+                <input {...getInputProps()} name="picture" />
+                {file ? (
+                  <p>{file.name}</p>
+                ) : (
+                  <p>Drag and drop an image here, or click to select a file</p>
+                )}
+              </div>
+            )}
+          </Dropzone>
           <input
             className="border border-slate-400 outline-none h-9 rounded-sm"
             type="email"
@@ -122,10 +145,10 @@ const Form = () => {
             placeholder=" Password"
             {...register("password", {
               required: "password is required!",
-              minLength: {
-                value: 8,
-                message: "Password must be more than eight.",
-              },
+              // minLength: {
+              //   value: 8,
+              //   message: "Password must be more than eight.",
+              // },
             })}
           />
           <p className="text-red-500 text-sm">{errors.password?.message}</p>

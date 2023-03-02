@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ClipboardIcon,
   ClipIcon,
@@ -6,8 +6,15 @@ import {
   AudioIcon,
 } from "../../assets/svg";
 import FeedWidget from "./FeedWidget";
+import Dropzone from "react-dropzone";
 
 const MyPostWidget = () => {
+  const [file, setFile] = useState(null);
+
+  const onDrop = (acceptedFiles) => {
+    setFile(acceptedFiles[0]);
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div className=" space-y-2 border h-36 shadow-md rounded-md  p-3">
@@ -24,7 +31,20 @@ const MyPostWidget = () => {
             placeholder="What's on your mind?"
           />
         </div>
-        {/* <div>1</div> */}
+        <Dropzone onDrop={onDrop}>
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} name="picture" />
+              {file ? (
+                <p>{file.name}</p>
+              ) : (
+                <div className="dotted h-10 text-slate-400 text-center cursor-pointer">
+                  Drag and drop an image here, or click to select a file
+                </div>
+              )}
+            </div>
+          )}
+        </Dropzone>
         <hr></hr>
         <ul className="flex items-center justify-between w-full">
           <li>
