@@ -11,8 +11,7 @@
   @apply transition-all duration-300 ease-in-out;
 }
 
-
 .dotted {
-  border:0;
+  border: 0;
   border: 2px dotted;
 }

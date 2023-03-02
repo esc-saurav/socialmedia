@@ -113,7 +113,7 @@ const Form = () => {
             onChange={(e) => setPhoto(e.target.files[0])}
           /> */}
           {/* <p className="text-red-500 text-sm ml-2">{errors.file?.message}</p> */}
-          <Dropzone accept=".jpg, .jpeg, .png" onDrop={onDrop}>
+          <Dropzone  onDrop={onDrop}>
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()}>
                 <input {...getInputProps()} name="picture" />
