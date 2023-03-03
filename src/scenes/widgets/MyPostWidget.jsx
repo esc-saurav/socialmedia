@@ -6,37 +6,62 @@ import {
   AudioIcon,
 } from "../../assets/svg";
 import FeedWidget from "./FeedWidget";
+import { setPosts } from "../../state";
 import Dropzone from "react-dropzone";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
-const MyPostWidget = () => {
-  const [file, setFile] = useState(null);
+const MyPostWidget = ({ picturePath }) => {
+  const dispatch = useDispatch();
+  const { _id } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.token);
+  const [post, setPost] = useState("");
+  const [image, setImage] = useState(null);
 
   const onDrop = (acceptedFiles) => {
-    setFile(acceptedFiles[0]);
+    setImage(acceptedFiles[0]);
   };
+
+  const handlePost = async () => {
+    const formData = new FormData();
+    formData.append("userId", _id);
+    formData.append("description", post);
+    formData.append("picture", image);
+    formData.append("picturePath", image.name);
+
+    const response = await axios.post(`http://localhost:3001/posts`, formData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const posts = await response.json();
+    dispatch(setPosts({ posts }));
+    setPost("");
+  };
+
+  console.log(post);
 
   return (
     <div className="flex flex-col gap-4">
-      <div className=" space-y-2 border h-36 shadow-md rounded-md  p-3">
+      <div className=" space-y-2 border h-44 shadow-md rounded-md  p-3">
         <div className="flex items-center gap-2">
           <img
             className="h-12 w-12 object-cover rounded-full"
-            // src={pictutePath}
-            src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+            src={picturePath}
             alt=""
           />
           <input
             className="border bg-gray-200  h-10 w-full outline-none p-2 rounded-lg"
             type="text"
             placeholder="What's on your mind?"
+            name="description"
+            onChange={(e) => setPost(e.target.value)}
           />
         </div>
         <Dropzone onDrop={onDrop}>
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()}>
               <input {...getInputProps()} name="picture" />
-              {file ? (
-                <p>{file.name}</p>
+              {image ? (
+                <p>{image.name}</p>
               ) : (
                 <div className="dotted h-10 text-slate-400 text-center cursor-pointer">
                   Drag and drop an image here, or click to select a file
@@ -72,7 +97,10 @@ const MyPostWidget = () => {
             </span>
           </li>
           <li>
-            <button className="bg-blue-600 text-white rounded-xl px-4 py-1">
+            <button
+              onClick={handlePost}
+              className="bg-blue-600 text-white rounded-xl px-4 py-1"
+            >
               Post
             </button>
           </li>

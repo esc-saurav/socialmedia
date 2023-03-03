@@ -29,7 +29,6 @@ const UserWidget = ({ userId, picturePath }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -137,7 +136,7 @@ const UserWidget = ({ userId, picturePath }) => {
           </div>
         </div>
         <div className="w-[40%]">
-          <MyPostWidget />
+          <MyPostWidget picturePath={picturePath} />
         </div>
         <div className="w-[30%] flex flex-col gap-4 h-[50%] sticky top-24 ">
           <SponserWidget />

@@ -16,20 +16,24 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
   const onSubmit = async (data) => {
     const formData = {
       email: data.email,
       password: data.password,
     };
-    // formData.append("email", data.email);
-    // formData.append("password", data.password);
+
     try {
       const response = await axios.post(
         "http://localhost:3001/auth/login",
-
-        formData
+        formData,
+        {
+          headers: headers,
+        }
       );
-
       const loggedIn = await response.data;
       console.log("now", response.data);
       if (loggedIn) {
