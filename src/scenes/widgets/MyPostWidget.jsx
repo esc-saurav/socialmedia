@@ -45,7 +45,7 @@ const MyPostWidget = ({ picturePath }) => {
         <div className="flex items-center gap-2">
           <img
             className="h-12 w-12 object-cover rounded-full"
-            src={picturePath}
+            src={`http://localhost:5000/assets/${picturePath}`}
             alt=""
           />
           <input

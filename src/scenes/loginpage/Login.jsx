@@ -6,6 +6,8 @@ import { setLogin } from "../../state";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -13,8 +15,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const headers = {
     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/auth/login",
+        "http://localhost:5000/auth/login",
         formData,
         {
           headers: headers,

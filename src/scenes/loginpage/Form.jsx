@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Dropzone from "react-dropzone";
 
 const Form = () => {
-  const [file, setFile] = useState(null);
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-
-  const onDrop = (acceptedFiles) => {
-    setFile(acceptedFiles[0]);
-  };
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -27,12 +20,12 @@ const Form = () => {
     formData.append("occupation", data.occupation);
     formData.append("password", data.password);
     formData.append("email", data.email);
-    formData.append("picture", file);
-    formData.append("picturePath", file.name);
+    formData.append("picture", data.picture[0]);
+    formData.append("picturePath", data.picture[0].name);
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/auth/register",
+        "http://localhost:5000/auth/register",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -107,24 +100,14 @@ const Form = () => {
           <p className="text-red-500 text-sm ml-2">
             {errors.occupation?.message}
           </p>
-          {/* <input
+          <input
             type="file"
             name="picture"
-            onChange={(e) => setPhoto(e.target.files[0])}
-          /> */}
-          {/* <p className="text-red-500 text-sm ml-2">{errors.file?.message}</p> */}
-          <Dropzone  onDrop={onDrop}>
-            {({ getRootProps, getInputProps }) => (
-              <div {...getRootProps()}>
-                <input {...getInputProps()} name="picture" />
-                {file ? (
-                  <p>{file.name}</p>
-                ) : (
-                  <p>Drag and drop an image here, or click to select a file</p>
-                )}
-              </div>
-            )}
-          </Dropzone>
+            {...register("picture", {
+              required: "picture is required!",
+            })}
+          />
+          <p className="text-red-500 text-sm ml-2">{errors.photo?.message}</p>
           <input
             className="border border-slate-400 outline-none h-9 rounded-sm"
             type="email"
@@ -145,10 +128,10 @@ const Form = () => {
             placeholder=" Password"
             {...register("password", {
               required: "password is required!",
-              // minLength: {
-              //   value: 8,
-              //   message: "Password must be more than eight.",
-              // },
+              minLength: {
+                value: 8,
+                message: "Password must be more than eight.",
+              },
             })}
           />
           <p className="text-red-500 text-sm">{errors.password?.message}</p>

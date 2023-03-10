@@ -5,7 +5,7 @@ const UserImage = ({ image }) => {
     <div>
       <img
         className="rounded-full object-cover"
-        src={`https://localhost:3001/assets/${image}`}
+        src={`https://localhost:5000/assets/${image}`}
       />
     </div>
   );
