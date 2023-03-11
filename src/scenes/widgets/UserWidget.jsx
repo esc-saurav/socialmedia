@@ -24,12 +24,11 @@ const UserWidget = ({ userId, picturePath }) => {
   const getUser = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/users/${userId}`,
+        `http://localhost:5000/users/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -65,8 +64,7 @@ const UserWidget = ({ userId, picturePath }) => {
             <div className="flex gap-2 items-center">
               <img
                 className="h-12 w-12 object-cover rounded-full"
-                src={picturePath}
-                // src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+                src={`http://localhost:5000/assets/${picturePath}`}
                 alt=""
               />
               <div className="flex flex-col">
@@ -75,7 +73,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
                   <p>{lastName}</p>
                 </div>
-                <p className="text-sm text-slate-500"> 
+                <p className="text-sm text-slate-500">
                   {friends.length} friends
                 </p>
               </div>
@@ -137,7 +135,7 @@ const UserWidget = ({ userId, picturePath }) => {
           </div>
         </div>
         <div className="w-[40%]">
-          <MyPostWidget />
+          <MyPostWidget picturePath={picturePath} />
         </div>
         <div className="w-[30%] flex flex-col gap-4 h-[50%] sticky top-24 ">
           <SponserWidget />

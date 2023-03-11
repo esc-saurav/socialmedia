@@ -1,7 +1,7 @@
 import React from "react";
 import { RemoveFriendIcon } from "../../assets/svg";
 
-const FeedWidget = () => {
+const FeedWidget = ({ picturePath }) => {
   return (
     <div className="flex items-center justify-between border rounded-md p-5 shadow-md">
       <div className="flex flex-col">
@@ -9,8 +9,7 @@ const FeedWidget = () => {
           <div className="flex gap-3">
             <img
               className="h-10 w-10 object-cover rounded-full"
-              // src={pictutePath}
-              src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+              src={`http://localhost:5000/assets/${picturePath}`}
               alt=""
             />
             <div className="flex flex-col">
