@@ -5,39 +5,42 @@ import {
   ImageIcon,
   AudioIcon,
 } from "../../assets/svg";
-import FeedWidget from "./FeedWidget";
 import { setPosts } from "../../state";
-import Dropzone from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import PostWidget from "./PostWidget";
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
   const { _id } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.token);
   const [post, setPost] = useState("");
-  const [image, setImage] = useState(null);
-
-  const onDrop = (acceptedFiles) => {
-    setImage(acceptedFiles[0]);
-  };
+  const [picture, setPicture] = useState(null);
 
   const handlePost = async () => {
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
-    formData.append("picture", image);
-    formData.append("picturePath", image.name);
+    formData.append("picture", picture[0]);
+    formData.append("picturePath", picture[0].name);
 
-    const response = await axios.post(`http://localhost:3001/posts`, formData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const posts = await response.json();
-    dispatch(setPosts({ posts }));
-    setPost("");
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/posts`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const posts = await response.json();
+      console.log(posts);
+      dispatch(setPosts({ posts }));
+      setPost("");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  console.log(post);
 
   return (
     <div className="flex flex-col gap-4">
@@ -56,20 +59,12 @@ const MyPostWidget = ({ picturePath }) => {
             onChange={(e) => setPost(e.target.value)}
           />
         </div>
-        <Dropzone onDrop={onDrop}>
-          {({ getRootProps, getInputProps }) => (
-            <div {...getRootProps()}>
-              <input {...getInputProps()} name="picture" />
-              {image ? (
-                <p>{image.name}</p>
-              ) : (
-                <div className="dotted h-10 text-slate-400 text-center cursor-pointer">
-                  Drag and drop an image here, or click to select a file
-                </div>
-              )}
-            </div>
-          )}
-        </Dropzone>
+        <input
+          onChange={(e) => setPicture(e.target.files)}
+          type="file"
+          name="picture"
+        />
+
         <hr></hr>
         <ul className="flex items-center justify-between w-full">
           <li>
@@ -106,7 +101,7 @@ const MyPostWidget = ({ picturePath }) => {
           </li>
         </ul>
       </div>
-      <FeedWidget />
+      {/* <PostWidget /> */}
     </div>
   );
 };

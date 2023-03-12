@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-const WidgetWrapper = () => {
-  return (
-    <div>WidgetWrapper</div>
-  )
-}
+// const WidgetWrapper = () => {
+//   return (
+//     <div>WidgetWrapper</div>
+//   )
+// }
 
-export default WidgetWrapper 
+// export default WidgetWrapper
