@@ -3,6 +3,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setPosts } from "../../state";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Postswidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -10,10 +12,12 @@ const Postswidget = ({ userId, isProfile = false }) => {
   const Token = useSelector((state) => state.token);
 
   const getPosts = async () => {
-    const response = await axios.get(`http://localhost:5000/posts/`, {
+    const response = await axios.get(`http://localhost:5000/posts`,
+     {
       headers: { Authorization: `Bearer ${Token}` },
     });
-    const data = await response.json();
+    // const data = await response.json();
+    const data = await response.data;
     dispatch(setPosts({ posts: data }));
   };
 
@@ -24,7 +28,7 @@ const Postswidget = ({ userId, isProfile = false }) => {
         headers: { Authorization: `Bearer ${Token}` },
       }
     );
-    const data = await response.json();
+    const data = await response.data;
     dispatch(setPosts({ posts: data }));
   };
 
@@ -42,7 +46,7 @@ const Postswidget = ({ userId, isProfile = false }) => {
         ({
           _id,
           userId,
-          firtName,
+          firstName,
           lastName,
           description,
           location,
@@ -55,7 +59,7 @@ const Postswidget = ({ userId, isProfile = false }) => {
             key={_id}
             postId={_id}
             postUserId={userId}
-            name={`${firtName} ${lastName}}`}
+            name={`${firstName} ${lastName}`}
             description={description}
             location={location}
             picturePath={picturePath}

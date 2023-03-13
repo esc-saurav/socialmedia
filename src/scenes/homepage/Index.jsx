@@ -5,14 +5,21 @@ import MyPostWidget from "../widgets/MyPostWidget";
 import UserWidget from "../widgets/UserWidget";
 import FriendsWidget from "../widgets/FriendsWidget";
 import PostWidget from "../widgets/PostWidget";
+import SponserWidget from "../widgets/SponserWidget";
 
 const HomePage = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
   return (
     <>
       <Navbar />
-      <UserWidget userId={_id} picturePath={picturePath} />
-      {/* <PostWidget userId={_id} /> */}
+      <div className="grid grid-cols-3 py-4  px-5">
+        <UserWidget userId={_id} picturePath={picturePath} />
+        <MyPostWidget picturePath={picturePath} />
+        <div className="flex flex-col w-11/12 mx-auto">
+          <SponserWidget />
+          <FriendsWidget />
+        </div>
+      </div>
     </>
   );
 };

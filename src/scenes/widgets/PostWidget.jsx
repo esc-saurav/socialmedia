@@ -6,9 +6,7 @@ import axios from "axios";
 import { setPosts } from "../../state";
 import { RemoveFriendIcon } from "../../assets/svg";
 
-
-
-const PostWidget = (
+const PostWidget = ({
   key,
   postId,
   postUserId,
@@ -18,8 +16,8 @@ const PostWidget = (
   picturePath,
   userPicturePath,
   likes,
-  comments
-) => {
+  comments,
+}) => {
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
@@ -40,6 +38,7 @@ const PostWidget = (
     dispatch(setPosts({ posts: updatedPost }));
   };
 
+
   return (
     <div className="flex items-center justify-between border rounded-md p-5 shadow-md">
       <div className="flex flex-col">
@@ -48,7 +47,7 @@ const PostWidget = (
             <img
               alt=""
               className="h-10 w-10 object-cover rounded-full"
-              src={`http://localhost:5000/assets/${picturePath}`}
+              src={`http://localhost:5000/assets/${userPicturePath}`}
             />
             <div className="flex flex-col">
               <p className="text-sm">{name}</p>
@@ -60,13 +59,11 @@ const PostWidget = (
           </div>
         </div>
         <div className="py-4 flex flex-col items-center ">
-          <p className="text-sm">
-            {description}
-          </p>
+          <p className="text-sm">{description}</p>
           <img
             className="rounded-md w-full py-1"
             alt=""
-            src="https://plus.unsplash.com/premium_photo-1669998297585-e0ceaab884bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+            src={`http://localhost:5000/assets/${picturePath}`}
           />
         </div>
       </div>

@@ -9,6 +9,7 @@ import { setPosts } from "../../state";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import PostWidget from "./PostWidget";
+import Postswidget from "./Postswidget";
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const MyPostWidget = ({ picturePath }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4">
       <div className=" space-y-2 border h-44 shadow-md rounded-md  p-3">
         <div className="flex items-center gap-2">
           <img
@@ -101,7 +102,7 @@ const MyPostWidget = ({ picturePath }) => {
           </li>
         </ul>
       </div>
-      {/* <PostWidget /> */}
+      <Postswidget/>
     </div>
   );
 };
