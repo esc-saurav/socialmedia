@@ -3,13 +3,11 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { setFriends, setPosts } from "../../state";
-import { CommentIcon, LikeIcon, RemoveFriendIcon } from "../../assets/svg";
+import { setPosts } from "../../state";
+import { CommentIcon, LikeIcon } from "../../assets/svg";
 import Friend from "./Friend";
-import { useNavigate } from "react-router-dom";
 
 const PostWidget = ({
-  key,
   postId,
   postUserId,
   name,
@@ -28,21 +26,25 @@ const PostWidget = ({
   const likeCount = Object.keys(likes).length;
 
   //--------------------------------------------------
- 
-  const patchLike = async () => {
-    const response = await axios.patch(
-      `http://localhost:5000/posts/${postId}/like`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
-        },
 
-        body: JSON.stringify({ userId: loggedInUserId }),
-      }
-    );
-    const updatedPost = await response.data;
-    dispatch(setPosts({ posts: updatedPost }));
+  const patchLike = async () => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:5000/posts/${postId}/like`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "content-type": "application/json",
+          },
+
+          body: JSON.stringify({ userId: loggedInUserId }),
+        }
+      );
+      const updatedPost = await response.data;
+      dispatch(setPosts({ posts: updatedPost }));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -78,6 +80,7 @@ const PostWidget = ({
         <div className="flex gap-4">
           <div className="flex flex-col items-center gap-1">
             <LikeIcon
+              onClick={() => patchLike()}
               className={`cursor-pointer w-6 h-6 ${isLiked && "bg-blue-500 "}}`}
             />
             <p>{likeCount}</p>

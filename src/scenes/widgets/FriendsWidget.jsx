@@ -1,18 +1,15 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { RemoveFriendIcon } from "../../assets/svg";
 import { setFriends } from "../../state";
 import { useSelector } from "react-redux";
 
 const FriendsWidget = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
-  console.log(_id);
 
   const getFriends = async () => {
     const response = await axios.get(
@@ -23,27 +20,26 @@ const FriendsWidget = () => {
       }
     );
     const data = await response.data;
-    console.log("hi", data);
     dispatch(setFriends({ friends: data }));
   };
 
   useEffect(() => {
     getFriends();
-  }, []);
+  });
 
   return (
-    <>
-      <div className="flex flex-col border p-4 rounded-md shadow-md space-y-2 sticky top-24">
+    <div className="px-2">
+      <div className="flex flex-col border p-4 rounded-md shadow-md space-y-2">
         <p className="text-sm font-[500]">Friend List</p>
-        {friends.map((friend) => {
+        {friends.map((friend, index) => {
           return (
-            <div className="flex justify-between items-center">
+            <div key={index} className="flex justify-between items-center">
               <div className="flex gap-2 items-center">
-                <img
+                {/* <img
                   className="h-12 w-12 object-cover rounded-full"
                   src={`http://localhost:5000/assets/${friend.picturePath}`}
                   alt=""
-                />
+                /> */}
                 <div className="flex flex-col">
                   <p className="text-sm font-medium">{`${friend.firstName} ${friend.lastName}`}</p>
                   <p className="text-sm text-slate-400">{friend.subtitle}</p>
@@ -59,7 +55,7 @@ const FriendsWidget = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

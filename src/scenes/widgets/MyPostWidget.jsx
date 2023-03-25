@@ -8,22 +8,28 @@ import {
 import { setPosts } from "../../state";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import PostWidget from "./PostWidget";
 import Postswidget from "./Postswidget";
+import { useForm } from "react-hook-form";
 
 const MyPostWidget = ({ picturePath }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const { _id } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.token);
-  const [post, setPost] = useState("");
-  const [picture, setPicture] = useState(null);
+  // const [post, setPost] = useState("");
+  // const [picture, setPicture] = useState(null);
 
-  const handlePost = async () => {
+  const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("userId", _id);
-    formData.append("description", post);
-    formData.append("picture", picture[0]);
-    formData.append("picturePath", picture[0].name);
+    formData.append("description", data.description);
+    formData.append("picture", data.picture[0]);
+    formData.append("picturePath", data.picture[0].name);
 
     try {
       const response = await axios.post(
@@ -35,17 +41,19 @@ const MyPostWidget = ({ picturePath }) => {
       );
 
       const posts = await response.json();
-      console.log(posts);
       dispatch(setPosts({ posts }));
-      setPost("");
     } catch (error) {
       console.log(error);
     }
+    reset();
   };
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <div className=" space-y-2 border h-44 shadow-md rounded-md  p-3">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className=" space-y-2 border h-44 shadow-md rounded-md  p-3"
+      >
         <div className="flex items-center gap-2">
           <img
             className="h-12 w-12 object-cover rounded-full"
@@ -57,14 +65,18 @@ const MyPostWidget = ({ picturePath }) => {
             type="text"
             placeholder="What's on your mind?"
             name="description"
-            onChange={(e) => setPost(e.target.value)}
+            {...register("description", { required: "desc required" })}
           />
+          <p className="text-red-500 text-sm ml-2">
+            {errors.description?.message}
+          </p>
         </div>
         <input
-          onChange={(e) => setPicture(e.target.files)}
           type="file"
           name="picture"
+          {...register("picture", { required: "Picture required" })}
         />
+        <p className="text-red-500 text-sm ml-2">{errors.picture?.message}</p>
 
         <hr></hr>
         <ul className="flex items-center justify-between w-full">
@@ -94,15 +106,15 @@ const MyPostWidget = ({ picturePath }) => {
           </li>
           <li>
             <button
-              onClick={handlePost}
-              className="bg-blue-600 text-white rounded-xl px-4 py-1"
+              type="submit"
+              className=" bg-blue-600 text-white rounded-xl px-4 py-1"
             >
               Post
             </button>
           </li>
         </ul>
-      </div>
-      <Postswidget/>
+      </form>
+      <Postswidget />
     </div>
   );
 };

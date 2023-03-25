@@ -12,11 +12,9 @@ const Postswidget = ({ userId, isProfile = false }) => {
   const Token = useSelector((state) => state.token);
 
   const getPosts = async () => {
-    const response = await axios.get(`http://localhost:5000/posts`,
-     {
+    const response = await axios.get(`http://localhost:5000/posts`, {
       headers: { Authorization: `Bearer ${Token}` },
     });
-    // const data = await response.json();
     const data = await response.data;
     dispatch(setPosts({ posts: data }));
   };

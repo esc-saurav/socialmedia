@@ -54,8 +54,8 @@ const UserWidget = ({ userId, picturePath }) => {
   } = user;
 
   return (
-    <>
-      <div className="w-11/12  py-3 px-4 border flex flex-col shadow-md rounded-md gap-2  sticky">
+    <div className="px-2 ">
+      <div className="py-3  px-4 border flex flex-col shadow-md rounded-md gap-2 h-fit">
         <div
           onClick={() => navigate(`/profile/${userId}`)}
           className="flex items-center justify-between cursor-pointer"
@@ -138,7 +138,7 @@ const UserWidget = ({ userId, picturePath }) => {
           <SponserWidget />
           <FriendsWidget />
         </div> */}
-    </>
+    </div>
   );
 };
 

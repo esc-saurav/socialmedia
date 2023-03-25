@@ -6,29 +6,33 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { RemoveFriendIcon } from "../../assets/svg";
 
-const Friend = ({ friendsId }) => {
+const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch;
-  const navigate = useNavigate;
-  const token = useSelector((state) => state.token);
   const { _id } = useSelector((state) => state.user);
+
+  const Token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
-  const isFriend = friends.find((friends) => friends._id === friendsId);
+  // const isFriend = friends.find((friend) => friend._id === friendId);
 
   const patchFriend = async () => {
-    const response = await axios.patch(
-      `http://localhost:5000/users/${_id}/${friendsId}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        "content-type": "application/json",
-      }
-    );
-    const data = await response.data;
-    dispatch(setFriends({ friends: data }));
+    try {
+      const response = await axios.patch(
+        `http://localhost:5000/users/${_id}/${friendId}`,
+        {
+          headers: { Authorization: `Bearer ${Token}` },
+        }
+      );
+      const data = await response.data;
+      dispatch(setFriends({ friends: data }));
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <div>
       <div className="bg-blue-100 h-8 w-8 items-center rounded-full flex justify-center p-2 cursor-pointer ">
-        <RemoveFriendIcon onClick={()=> patchFriend()} />
+        <RemoveFriendIcon onClick={patchFriend} />
       </div>
     </div>
   );
