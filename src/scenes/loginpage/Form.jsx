@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Form = () => {
   const {
@@ -11,8 +11,8 @@ const Form = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
-    console.log(data);
     const formData = new FormData();
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
@@ -36,6 +36,7 @@ const Form = () => {
       console.log(error);
     }
     reset();
+    navigate("/login");
   };
 
   return (

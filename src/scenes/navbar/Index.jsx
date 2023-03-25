@@ -20,8 +20,8 @@ const Navbar = () => {
       <div className="py-4 flex justify-between items-center lg:w-11/12 mx-auto px-4">
         <div className="flex gap-5 items-center">
           <h1 className="text-3xl font-bold text-blue-600">SocialMedia</h1>
-          <div className="md:flex hidden items-center relative ">
-            <input
+          <div className="md:flex hidden items-center relative "> 
+            <input 
               className="border bg-gray-200  h-10 w-60 outline-none p-2 rounded-lg"
               type="text"
               placeholder=" search"
