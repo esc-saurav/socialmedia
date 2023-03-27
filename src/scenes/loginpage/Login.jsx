@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ const Login = () => {
     reset,
     formState: { errors },
   } = useForm();
-
 
   const headers = {
     "Content-Type": "application/json",
@@ -35,7 +35,13 @@ const Login = () => {
         }
       );
       const loggedIn = await response.data;
-      console.log("now", response.data);
+      toast.success("Login Successful", {
+        position: "bottom-right",
+        style: {
+          background: "#4BB543",
+          color: "#fff",
+        },
+      });
       if (loggedIn) {
         dispatch(
           setLogin({
@@ -48,6 +54,13 @@ const Login = () => {
       console.log(response.data);
     } catch (error) {
       console.log(error);
+      toast.error(error.message || "Login Failed , Please try again", {
+        position: "bottom-right",
+        style: {
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
     }
     reset();
   };

@@ -4,11 +4,13 @@ import ProfilePage from "./scenes/profilePage/Index";
 import LoginPage from "./scenes/loginpage/Index";
 import Login from "./scenes/loginpage/Login";
 import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
   return (
     <div className="font-rubik">
+      <Toaster />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />

@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Form = () => {
   const {
@@ -31,9 +32,22 @@ const Form = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      console.log(response.data);
+      toast.success("Registration Successful", {
+        position: "bottom-right",
+        style: {
+          background: "#4BB543",
+          color: "#fff",
+        },
+      });
     } catch (error) {
       console.log(error);
+      toast.error("Registration Failed", {
+        position: "bottom-right",
+        style: {
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
     }
     reset();
     navigate("/login");
