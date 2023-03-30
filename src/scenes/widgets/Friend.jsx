@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "../../state";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axios from "../../api/apiinstance";
 import { RemoveFriendIcon } from "../../assets/svg";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
@@ -16,12 +16,9 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   const patchFriend = async () => {
     try {
-      const response = await axios.patch(
-        `http://localhost:5000/users/${_id}/${friendId}`,
-        {
-          headers: { Authorization: `Bearer ${Token}` },
-        }
-      );
+      const response = await axios.patch(`/users/${_id}/${friendId}`, {
+        headers: { Authorization: `Bearer ${Token}` },
+      });
       const data = await response.data;
       dispatch(setFriends({ friends: data }));
     } catch (err) {

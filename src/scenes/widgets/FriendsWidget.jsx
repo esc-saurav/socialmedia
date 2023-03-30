@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../api/apiinstance";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RemoveFriendIcon } from "../../assets/svg";
@@ -12,13 +12,10 @@ const FriendsWidget = () => {
   const friends = useSelector((state) => state.user.friends);
 
   const getFriends = async () => {
-    const response = await axios.get(
-      `http://localhost:5000/users/${_id}/friends`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        "content-type": "application/json",
-      }
-    );
+    const response = await axios.get(`/users/${_id}/friends`, {
+      headers: { Authorization: `Bearer ${token}` },
+      "content-type": "application/json",
+    });
     const data = await response.data;
     dispatch(setFriends({ friends: data }));
   };

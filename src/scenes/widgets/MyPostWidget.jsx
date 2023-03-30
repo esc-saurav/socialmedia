@@ -7,9 +7,10 @@ import {
 } from "../../assets/svg";
 import { setPosts } from "../../state";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import axios from "../../api/apiinstance";
 import Postswidget from "./Postswidget";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 const MyPostWidget = ({ picturePath }) => {
   const {
@@ -32,18 +33,28 @@ const MyPostWidget = ({ picturePath }) => {
     formData.append("picturePath", data.picture[0].name);
 
     try {
-      const response = await axios.post(
-        `http://localhost:5000/posts`,
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.post(`/posts`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      const posts = await response.json();
+      const posts = await response.data;
+      toast.success("Post Successful", {
+        position: "bottom-right",
+        style: {
+          background: "#4BB543",
+          color: "#fff",
+        },
+      });
       dispatch(setPosts({ posts }));
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong...", {
+        position: "bottom-right",
+        style: {
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
     }
     reset();
   };
@@ -57,7 +68,7 @@ const MyPostWidget = ({ picturePath }) => {
         <div className="flex items-center gap-2">
           <img
             className="h-12 w-12 object-cover rounded-full"
-            src={`http://localhost:5000/assets/${picturePath}`}
+            src={`http://192.168.1.69:5000/assets/${picturePath}`}
             alt=""
           />
           <input
