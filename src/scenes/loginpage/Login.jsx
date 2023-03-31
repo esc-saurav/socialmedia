@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios from "../../api/apiinstance";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
 import { useNavigate } from "react-router-dom";
@@ -27,13 +27,9 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/auth/login",
-        formData,
-        {
-          headers: headers,
-        }
-      );
+      const response = await axios.post("/auth/login", formData, {
+        headers: headers,
+      });
       const loggedIn = await response.data;
       toast.success("Login Successful", {
         position: "bottom-right",

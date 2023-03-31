@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axios from "../../api/apiinstance";
 import { setPosts } from "../../state";
 import { CommentIcon, LikeIcon } from "../../assets/svg";
 import Friend from "./Friend";
@@ -29,17 +29,14 @@ const PostWidget = ({
 
   const patchLike = async () => {
     try {
-      const response = await axios.patch(
-        `http://localhost:5000/posts/${postId}/like`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "content-type": "application/json",
-          },
+      const response = await axios.patch(`/posts/${postId}/like`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "content-type": "application/json",
+        },
 
-          body: JSON.stringify({ userId: loggedInUserId }),
-        }
-      );
+        body: JSON.stringify({ userId: loggedInUserId }),
+      });
       const updatedPost = await response.data;
       dispatch(setPosts({ posts: updatedPost }));
     } catch (err) {
@@ -55,7 +52,7 @@ const PostWidget = ({
             <img
               alt=""
               className="h-10 w-10 object-cover rounded-full"
-              src={`http://localhost:5000/assets/${userPicturePath}`}
+              src={`http://192.168.1.69:5000/assets/${userPicturePath}`}
             />
             <div className="flex flex-col">
               <p className="text-sm">{name}</p>
@@ -74,7 +71,7 @@ const PostWidget = ({
           <img
             className="rounded-md w-full py-1"
             alt=""
-            src={`http://localhost:5000/assets/${picturePath}`}
+            src={`http://192.168.1.69:5000/assets/${picturePath}`}
           />
         </div>
         <div className="flex gap-4">

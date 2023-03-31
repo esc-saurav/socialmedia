@@ -1,10 +1,10 @@
 import PostWidget from "./PostWidget";
 import React from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import { setPosts } from "../../state";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import axios from "../../api/apiinstance";
 
 const Postswidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Postswidget = ({ userId, isProfile = false }) => {
   const Token = useSelector((state) => state.token);
 
   const getPosts = async () => {
-    const response = await axios.get(`http://localhost:5000/posts`, {
+    const response = await axios.get(`/posts`, {
       headers: { Authorization: `Bearer ${Token}` },
     });
     const data = await response.data;
@@ -20,12 +20,9 @@ const Postswidget = ({ userId, isProfile = false }) => {
   };
 
   const gerUserPosts = async () => {
-    const response = await axios.get(
-      `http://localhost:5000/posts/${userId}/posts`,
-      {
-        headers: { Authorization: `Bearer ${Token}` },
-      }
-    );
+    const response = await axios.get(`/posts/${userId}/posts`, {
+      headers: { Authorization: `Bearer ${Token}` },
+    });
     const data = await response.data;
     dispatch(setPosts({ posts: data }));
   };

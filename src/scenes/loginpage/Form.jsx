@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios from "../../api/apiinstance";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
@@ -25,13 +25,9 @@ const Form = () => {
     formData.append("picturePath", data.picture[0].name);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/auth/register",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      const response = await axios.post("/auth/register", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       toast.success("Registration Successful", {
         position: "bottom-right",
         style: {

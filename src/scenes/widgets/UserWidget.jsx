@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../api/apiinstance";
 import FriendsWidget from "./FriendsWidget";
 import {
   LinkedInIcon,
@@ -23,12 +23,9 @@ const UserWidget = ({ userId, picturePath }) => {
 
   const getUser = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/users/${userId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get(`/users/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -63,7 +60,7 @@ const UserWidget = ({ userId, picturePath }) => {
           <div className="flex gap-2 items-center">
             <img
               className="h-12 w-12 object-cover rounded-full"
-              src={`http://localhost:5000/assets/${picturePath}`}
+              src={`http://192.168.1.69:5000/assets/${picturePath}`}
               alt=""
             />
             <div className="flex flex-col">
