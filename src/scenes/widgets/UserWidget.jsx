@@ -1,5 +1,4 @@
 import React from "react";
-// import UserImage from "../../components/UserImage";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
