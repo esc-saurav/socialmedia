@@ -25,7 +25,7 @@ const Form = () => {
     formData.append("picturePath", data.picture[0].name);
 
     try {
-      const response = await axios.post("/auth/register", formData, {
+       await axios.post("/auth/register", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Registration Successful", {

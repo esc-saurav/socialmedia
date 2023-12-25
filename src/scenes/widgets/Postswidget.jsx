@@ -33,7 +33,7 @@ const Postswidget = ({ userId, isProfile = false }) => {
     } else {
       getPosts();
     }
-  }, []);
+  });
 
   return (
     <>

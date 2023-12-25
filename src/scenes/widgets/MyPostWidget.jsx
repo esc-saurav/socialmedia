@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ClipboardIcon,
   ClipIcon,
@@ -22,8 +22,7 @@ const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
   const { _id } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.token);
-  // const [post, setPost] = useState("");
-  // const [picture, setPicture] = useState(null);
+ 
 
   const onSubmit = async (data) => {
     const formData = new FormData();

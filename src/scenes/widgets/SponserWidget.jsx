@@ -1,5 +1,4 @@
 import React from "react";
-import FriendsWidget from "./FriendsWidget";
 
 const SponserWidget = () => {
   return (
@@ -10,6 +9,7 @@ const SponserWidget = () => {
           <p className="text-sm text-slate-500 cursor-pointer">Create Ad</p>
         </div>
         <img
+          alt= ""
           className="rounded-md"
           src="https://wappier.com/wp-content/uploads/2022/09/How-to-Start-Earning-Mobile-Game-Ad-Revenue-in-2022.png"
         />
